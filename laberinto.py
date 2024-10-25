@@ -583,17 +583,20 @@ def juego_laberinto():
         print(puzzle["enunciado"])
         for letra, opcion in mapeo_opciones.items():
             print(f"{letra}) {opcion}") 
-        respuesta = input("Tu respuesta: ").lower()
-        while respuesta not in letras_opciones:
-          respuesta = input("Por favor ingresa una opción válida (a/b/c/d): ").lower()
+        while True:
+          respuesta = input("Tu respuesta: ").lower()
+          if respuesta not in letras_opciones:
+            print(("Por favor ingresa una opción válida (a/b/c/d): ").lower())
+          elif respuesta in letras_opciones:
           # Comprobar si la respuesta es correcta
-        while  mapeo_opciones[respuesta] != puzzle["respuesta_correcta"]:
-          print("¡Incorrecto! Pierdes 20 de vida")
-          vida -= 20
-          respuesta = input("Intentalo otra vez: ").lower()
-        print("Respuesta correcta. Has ganado 100 de energia! Esto te servira para vencer a los monstruos que acechan el laberinto") 
-        energia += 100
-        lista_posiciones.remove(posicion_final) 
+            if mapeo_opciones[respuesta] != puzzle["respuesta_correcta"]:
+              print("¡Incorrecto! Pierdes 20 de vida")
+              vida -= 20
+            else:
+              print("Respuesta correcta. Has ganado 100 de energia! Esto te servira para vencer a los monstruos que acechan el laberinto") 
+              energia += 100
+              lista_posiciones.remove(posicion_final) 
+              break
 
       elif tipo_evento == "Puzzles con pistas":  
         print("Valiente viajero, gracias por querer salvarnos del horror. Como ayuda te dare un mensaje de salvacion")
